@@ -1,0 +1,62 @@
+[gd_scene load_steps=8 format=2]
+
+[ext_resource path="res://assets/tileset.tres" type="TileSet" id=1]
+[ext_resource path="res://scripts/world.gd" type="Script" id=2]
+[ext_resource path="res://scenes/player.tscn" type="PackedScene" id=3]
+
+[sub_resource type="RectangleShape2D" id=1]
+extents = Vector2( 10, 2048 )
+
+[sub_resource type="RectangleShape2D" id=2]
+extents = Vector2( 2048, 10 )
+
+[sub_resource type="RectangleShape2D" id=3]
+extents = Vector2( 10, 2048 )
+
+[sub_resource type="RectangleShape2D" id=4]
+extents = Vector2( 2048, 10 )
+
+[node name="World" type="Node2D"]
+script = ExtResource( 2 )
+
+[node name="ground" type="TileMap" parent="."]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+format = 1
+
+[node name="YSort" type="YSort" parent="."]
+
+[node name="PlayerController" parent="YSort" instance=ExtResource( 3 )]
+position = Vector2( 198, 103 )
+
+[node name="tree" type="TileMap" parent="YSort"]
+tile_set = ExtResource( 1 )
+cell_size = Vector2( 8, 8 )
+cell_y_sort = true
+format = 1
+
+[node name="world boarder" type="Node2D" parent="."]
+
+[node name="boarder1" type="StaticBody2D" parent="world boarder"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world boarder/boarder1"]
+position = Vector2( -10, 2048 )
+shape = SubResource( 1 )
+
+[node name="boarder2" type="StaticBody2D" parent="world boarder"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world boarder/boarder2"]
+position = Vector2( 2048, -10 )
+shape = SubResource( 2 )
+
+[node name="boarder3" type="StaticBody2D" parent="world boarder"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world boarder/boarder3"]
+position = Vector2( 4106, 2048 )
+shape = SubResource( 3 )
+
+[node name="boarder4" type="StaticBody2D" parent="world boarder"]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="world boarder/boarder4"]
+position = Vector2( 2048, 4106 )
+shape = SubResource( 4 )
