@@ -2,7 +2,7 @@ extends KinematicBody2D
 
 onready var anim = $AnimationPlayer
 
-var speed = 48
+var speed = 30
 var velocity = Vector2()
 
 func _ready():
@@ -11,6 +11,7 @@ func _ready():
 func _physics_process(delta):
 	
 	anim.play("IDLE")
+	$AnimatedSprite.speed_scale = 0.08+speed/25
 	velocity = Vector2()
 	
 	if Input.is_action_pressed("MOVE_UP"):

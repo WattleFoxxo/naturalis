@@ -3,6 +3,8 @@ extends Node2D
 onready var layer_ground = $ground
 onready var layer_tree = $YSort/tree
 
+onready var player = $YSort/PlayerController
+
 var river_noise = OpenSimplexNoise.new()
 var terrain_noise = OpenSimplexNoise.new()
 var tree_noise = OpenSimplexNoise.new()
@@ -10,6 +12,9 @@ var rng = RandomNumberGenerator.new()
 
 func _ready():
 	world_gen()
+
+func _process(delta):
+	Globals.playerpos = Vector2(round(player.position.x/8), round(player.position.y/8))
 
 func world_gen():
 	rng.seed = Globals.world_seed
@@ -98,3 +103,4 @@ func gen_objects():
 				layer_tree.set_cell(x, y, tile)
 			
 	layer_tree.update_bitmask_region()
+	
