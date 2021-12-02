@@ -1,6 +1,7 @@
 extends Node2D
 
 onready var layer_ground = $ground
+onready var layer_ground_cover = $ground2
 onready var layer_tree = $YSort/tree
 
 onready var player = $YSort/PlayerController
@@ -31,7 +32,7 @@ func gen_ground():
 
 	for x in Globals.world_width:
 		for y in Globals.world_height:
-			var tile = 1
+			var tile = -1
 			var val = terrain_noise.get_noise_2d(x*6, y*6) + 1
 			
 			if val > 1.33:
@@ -46,7 +47,9 @@ func gen_ground():
 				tile = 30
 			
 			if tile:
-				layer_ground.set_cell(x, y, tile)
+				layer_ground_cover.set_cell(x, y, tile)
+				layer_ground.set_cell(x, y, 1)
+	layer_ground_cover.update_bitmask_region()
 	layer_ground.update_bitmask_region()
 
 func gen_river():
@@ -69,7 +72,9 @@ func gen_river():
 			
 			if tile:
 				layer_ground.set_cell(x, y, tile)
+				layer_ground_cover.set_cell(x, y, -1)
 	layer_ground.update_bitmask_region()
+	layer_ground_cover.update_bitmask_region()
 
 func gen_objects():
 	tree_noise.seed = Globals.world_seed

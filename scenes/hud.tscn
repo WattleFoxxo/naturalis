@@ -15,14 +15,13 @@ __meta__ = {
 }
 
 [node name="debug" type="Label" parent="."]
-margin_left = 6.0
-margin_top = 6.0
-margin_right = 490.0
-margin_bottom = 28.0
-custom_colors/font_outline_modulate = Color( 0.411765, 0.411765, 0.411765, 1 )
-custom_colors/font_color_shadow = Color( 0.411765, 0.411765, 0.411765, 1 )
+anchor_right = 1.0
+anchor_bottom = 1.0
+custom_colors/font_color = Color( 1, 1, 1, 1 )
+custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "Salvos pre-alpha v0.0.0 (press [f1] to open debug)"
+autowrap = true
 __meta__ = {
 "_edit_use_anchors_": false
 }
