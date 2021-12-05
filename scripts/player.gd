@@ -3,7 +3,7 @@ extends KinematicBody2D
 onready var anim = $AnimationPlayer
 onready var world = get_tree().get_root().get_node("World")
 
-var speed = 30
+var speed = 40
 var velocity = Vector2()
 
 var selected_item = 0;
@@ -18,9 +18,22 @@ func _ready():
 	pass
 
 func _physics_process(delta):
+	var playerpos = world.get_node(layer_lookup[0]).world_to_map(Vector2(position.x+4, position.y+8))
+	print(world.get_node(layer_lookup[0]).get_cell_autotile_coord(playerpos.x, playerpos.y) )
+	if world.get_node(layer_lookup[0]).get_cell(playerpos.x, playerpos.y) == 2 and world.get_node(layer_lookup[0]).get_cell_autotile_coord(playerpos.x, playerpos.y) == Vector2(6, 2) :
+		Globals.player_state = "WATER"
+		speed = 10
+	else:
+		Globals.player_state = ""
+		speed = 30
+	
+	$AnimatedSprite2.hide()
+	if Globals.player_state == "WATER":
+		$AnimatedSprite2.show()
 	
 	anim.play("IDLE")
-	$AnimatedSprite.speed_scale = 0.08+speed/25
+	$AnimatedSprite.speed_scale = 1/1.5
+	$AnimatedSprite2.speed_scale = 1/1.5
 	velocity = Vector2()
 	
 	if Input.is_action_just_pressed("SCROLL_UP"):
@@ -40,7 +53,6 @@ func _physics_process(delta):
 				world.get_node(layer_lookup[Globals.item_held.layer]).set_cell(pos.x, pos.y, Globals.item_held.tile_id)
 				world.get_node(layer_lookup[Globals.item_held.layer]).update_bitmask_area(pos)
 				for i in Globals.item_held.clear_layer:
-					print(i)
 					world.get_node(layer_lookup[i]).set_cell(pos.x, pos.y, -1)
 					world.get_node(layer_lookup[i]).update_bitmask_area(pos)
 	

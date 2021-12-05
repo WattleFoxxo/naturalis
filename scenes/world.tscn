@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=2]
+[gd_scene load_steps=11 format=2]
 
 [ext_resource path="res://assets/tileset.tres" type="TileSet" id=1]
 [ext_resource path="res://scripts/world.gd" type="Script" id=2]
@@ -17,18 +17,25 @@ extents = Vector2( 10, 2048 )
 [sub_resource type="RectangleShape2D" id=4]
 extents = Vector2( 2048, 10 )
 
+[sub_resource type="Animation" id=5]
+length = 0.001
+
+[sub_resource type="Animation" id=6]
+resource_name = "tiles"
+
 [node name="World" type="Node2D"]
 script = ExtResource( 2 )
 
 [node name="ground" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
-cell_size = Vector2( 8, 8 )
+cell_size = Vector2( 16, 16 )
 format = 1
 
 [node name="ground2" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
-cell_size = Vector2( 8, 8 )
+cell_size = Vector2( 16, 16 )
 format = 1
+tile_data = PoolIntArray( -131059, 39, 65555, -131058, 39, 262158, -131057, 39, 13, -65523, 39, 65550, -65520, 39, 65548, 6, 39, -65517, 7, 39, 196626, 8, 39, 131090, 15, 39, 131082, 131079, 39, 196624, 196610, 39, 16, 196611, 39, 131081, 196612, 39, 65555, 196622, 39, 11, 196623, 39, 65553, 196625, 39, 11, 196626, 39, -65521, 196639, 39, 15, 262159, 39, 65552, 262177, 39, 0, 327688, 39, 262155, 327689, 39, 262159, 327690, 39, 131088, 327691, 39, 131082, 327692, 39, 131082, 327693, 39, 262154, 327694, 39, 65552, 327707, 39, -65525, 327713, 39, 0, 458778, 39, -65518, 458785, 39, 0, 524321, 39, 0, 589857, 39, 0, 720925, 39, 131082 )
 
 [node name="YSort" type="YSort" parent="."]
 
@@ -37,7 +44,7 @@ position = Vector2( 198, 103 )
 
 [node name="tree" type="TileMap" parent="YSort"]
 tile_set = ExtResource( 1 )
-cell_size = Vector2( 8, 8 )
+cell_size = Vector2( 16, 16 )
 cell_y_sort = true
 format = 1
 
@@ -70,3 +77,8 @@ shape = SubResource( 4 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource( 4 )]
+visible = false
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+anims/RESET = SubResource( 5 )
+anims/tiles = SubResource( 6 )

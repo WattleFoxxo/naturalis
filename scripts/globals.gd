@@ -15,6 +15,8 @@ var item_lookup = {
 var playerpos = Vector2(0, 0)
 var item_held = {}
 
+var player_state = "WATER"
+
 var debug = ""
 
 func _process(delta):
