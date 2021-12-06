@@ -29,6 +29,7 @@ script = ExtResource( 2 )
 [node name="ground" type="TileMap" parent="."]
 tile_set = ExtResource( 1 )
 cell_size = Vector2( 16, 16 )
+show_collision = true
 format = 1
 
 [node name="ground2" type="TileMap" parent="."]
@@ -77,7 +78,6 @@ shape = SubResource( 4 )
 [node name="CanvasLayer" type="CanvasLayer" parent="."]
 
 [node name="Hud" parent="CanvasLayer" instance=ExtResource( 4 )]
-visible = false
 
 [node name="AnimationPlayer" type="AnimationPlayer" parent="."]
 anims/RESET = SubResource( 5 )

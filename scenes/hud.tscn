@@ -1,7 +1,8 @@
-[gd_scene load_steps=4 format=2]
+[gd_scene load_steps=5 format=2]
 
 [ext_resource path="res://assets/fonts/pixel_arial_11/PIXEARG_.TTF" type="DynamicFontData" id=1]
 [ext_resource path="res://scripts/hud.gd" type="Script" id=2]
+[ext_resource path="res://scripts/hotbar.gd" type="Script" id=3]
 
 [sub_resource type="DynamicFont" id=1]
 font_data = ExtResource( 1 )
@@ -22,6 +23,33 @@ custom_colors/font_color_shadow = Color( 0, 0, 0, 1 )
 custom_fonts/font = SubResource( 1 )
 text = "Salvos pre-alpha v0.0.0 (press [f1] to open debug)"
 autowrap = true
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="hotbar" type="Control" parent="."]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -147.5
+margin_top = -67.0
+margin_right = 147.5
+script = ExtResource( 3 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
+
+[node name="HBoxContainer" type="HBoxContainer" parent="hotbar"]
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+margin_left = -128.0
+margin_top = -70.0
+margin_right = 128.0
+margin_bottom = -6.0
+alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false
 }

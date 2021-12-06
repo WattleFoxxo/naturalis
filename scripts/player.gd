@@ -19,7 +19,6 @@ func _ready():
 
 func _physics_process(delta):
 	var playerpos = world.get_node(layer_lookup[0]).world_to_map(Vector2(position.x+4, position.y+8))
-	print(world.get_node(layer_lookup[0]).get_cell_autotile_coord(playerpos.x, playerpos.y) )
 	if world.get_node(layer_lookup[0]).get_cell(playerpos.x, playerpos.y) == 2 and world.get_node(layer_lookup[0]).get_cell_autotile_coord(playerpos.x, playerpos.y) == Vector2(6, 2) :
 		Globals.player_state = "WATER"
 		speed = 10
@@ -36,23 +35,13 @@ func _physics_process(delta):
 	$AnimatedSprite2.speed_scale = 1/1.5
 	velocity = Vector2()
 	
-	if Input.is_action_just_pressed("SCROLL_UP"):
-		if selected_item < len(Globals.item_lookup)-1:
-			selected_item += 1
-	
-	if Input.is_action_just_pressed("SCROLL_DOWN"):
-		if selected_item > 0:
-			selected_item -= 1
-	
-	Globals.item_held = Globals.item_lookup[selected_item]
-	
 	if Input.is_action_pressed("MBL"):
-		if Globals.item_held.tile:
-			var pos = Vector2(world.get_node(layer_lookup[Globals.item_held.layer]).world_to_map(get_global_mouse_position()).x, world.get_node(layer_lookup[Globals.item_held.layer]).world_to_map(get_global_mouse_position()).y)
-			if world.get_node(layer_lookup[0]).get_cell(pos.x, pos.y) in Globals.item_held.allowed_tiles and world.get_node(layer_lookup[1]).get_cell(pos.x, pos.y) in Globals.item_held.allowed_tiles and world.get_node(layer_lookup[2]).get_cell(pos.x, pos.y) in Globals.item_held.allowed_tiles:
-				world.get_node(layer_lookup[Globals.item_held.layer]).set_cell(pos.x, pos.y, Globals.item_held.tile_id)
-				world.get_node(layer_lookup[Globals.item_held.layer]).update_bitmask_area(pos)
-				for i in Globals.item_held.clear_layer:
+		if Globals.item_lookup[Globals.item_held].tile:
+			var pos = Vector2(world.get_node(layer_lookup[Globals.item_lookup[Globals.item_held].layer]).world_to_map(get_global_mouse_position()).x, world.get_node(layer_lookup[Globals.item_lookup[Globals.item_held].layer]).world_to_map(get_global_mouse_position()).y)
+			if world.get_node(layer_lookup[0]).get_cell(pos.x, pos.y) in Globals.item_lookup[Globals.item_held].allowed_tiles and world.get_node(layer_lookup[1]).get_cell(pos.x, pos.y) in Globals.item_lookup[Globals.item_held].allowed_tiles and world.get_node(layer_lookup[2]).get_cell(pos.x, pos.y) in Globals.item_lookup[Globals.item_held].allowed_tiles:
+				world.get_node(layer_lookup[Globals.item_lookup[Globals.item_held].layer]).set_cell(pos.x, pos.y, Globals.item_lookup[Globals.item_held].tile_id)
+				world.get_node(layer_lookup[Globals.item_lookup[Globals.item_held].layer]).update_bitmask_area(pos)
+				for i in Globals.item_lookup[Globals.item_held].clear_layer:
 					world.get_node(layer_lookup[i]).set_cell(pos.x, pos.y, -1)
 					world.get_node(layer_lookup[i]).update_bitmask_area(pos)
 	

@@ -1,10 +1,13 @@
-[gd_resource type="TileSet" load_steps=62 format=2]
+[gd_resource type="TileSet" load_steps=77 format=2]
 
 [ext_resource path="res://assets/tileset/fire/fire.tres" type="Texture" id=1]
 [ext_resource path="res://assets/tileset/forest.png" type="Texture" id=2]
 [ext_resource path="res://assets/tileset/water/water.tres" type="Texture" id=3]
 [ext_resource path="res://assets/tileset/forestDecoration_0.png" type="Texture" id=4]
 [ext_resource path="res://assets/tileset/forestDecoration_1.png" type="Texture" id=5]
+
+[sub_resource type="ConvexPolygonShape2D" id=57]
+points = PoolVector2Array( 15, 30, 1, 30, 1, 22, 15, 22 )
 
 [sub_resource type="ConvexPolygonShape2D" id=2]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
@@ -171,6 +174,48 @@ points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 [sub_resource type="ConvexPolygonShape2D" id=56]
 points = PoolVector2Array( 0, 0, 16, 0, 16, 16, 0, 16 )
 
+[sub_resource type="ConvexPolygonShape2D" id=58]
+points = PoolVector2Array( 29, 30, 3, 30, 3, 19, 29, 19 )
+
+[sub_resource type="ConvexPolygonShape2D" id=59]
+points = PoolVector2Array( 3, 19, 29, 19, 29, 30, 3, 30 )
+
+[sub_resource type="ConvexPolygonShape2D" id=60]
+points = PoolVector2Array( 15, 30, 1, 30, 1, 19, 15, 19 )
+
+[sub_resource type="ConvexPolygonShape2D" id=61]
+points = PoolVector2Array( 15, 30, 1, 30, 1, 19, 15, 19 )
+
+[sub_resource type="ConvexPolygonShape2D" id=62]
+points = PoolVector2Array( 27, 27, 5, 27, 5, 16, 27, 16 )
+
+[sub_resource type="ConvexPolygonShape2D" id=63]
+points = PoolVector2Array( 14, 14, 2, 14, 2, 7, 14, 7 )
+
+[sub_resource type="ConvexPolygonShape2D" id=64]
+points = PoolVector2Array( 15, 15, 1, 15, 1, 5, 15, 5 )
+
+[sub_resource type="ConvexPolygonShape2D" id=65]
+points = PoolVector2Array( 15, 14, 1, 14, 1, 6, 15, 6 )
+
+[sub_resource type="ConvexPolygonShape2D" id=66]
+points = PoolVector2Array( 13, 13, 3, 13, 3, 7, 13, 7 )
+
+[sub_resource type="ConvexPolygonShape2D" id=67]
+points = PoolVector2Array( 12, 14, 2, 14, 2, 6, 12, 6 )
+
+[sub_resource type="ConvexPolygonShape2D" id=68]
+points = PoolVector2Array( 11, 13, 5, 13, 5, 11, 11, 11 )
+
+[sub_resource type="ConvexPolygonShape2D" id=71]
+points = PoolVector2Array( 14, 29, 2, 29, 2, 22, 14, 22 )
+
+[sub_resource type="ConvexPolygonShape2D" id=69]
+points = PoolVector2Array( 13, 28, 3, 28, 3, 22, 13, 22 )
+
+[sub_resource type="ConvexPolygonShape2D" id=70]
+points = PoolVector2Array( 14, 29, 2, 29, 2, 22, 14, 22 )
+
 [sub_resource type="GDScript" id=1]
 script/source = "extends TileSet
 
@@ -211,13 +256,14 @@ func _is_tile_bound(id, neighbour_id):
 36/navigation_offset = Vector2( 0, 0 )
 36/shape_offset = Vector2( 0, -16 )
 36/shape_transform = Transform2D( 1, 0, 0, 1, 0, -16 )
+36/shape = SubResource( 57 )
 36/shape_one_way = false
 36/shape_one_way_margin = 1.0
 36/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": null,
+"shape": SubResource( 57 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, -16 )
 } ]
 36/z_index = 0
@@ -662,9 +708,16 @@ func _is_tile_bound(id, neighbour_id):
 43/navigation_offset = Vector2( 0, 0 )
 43/shape_offset = Vector2( 0, 0 )
 43/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+43/shape = SubResource( 58 )
 43/shape_one_way = false
-43/shape_one_way_margin = 0.0
-43/shapes = [  ]
+43/shape_one_way_margin = 1.0
+43/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 58 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 43/z_index = 0
 44/name = "forestDecoration_0.png 44"
 44/texture = ExtResource( 4 )
@@ -676,9 +729,16 @@ func _is_tile_bound(id, neighbour_id):
 44/navigation_offset = Vector2( 0, 0 )
 44/shape_offset = Vector2( 0, 0 )
 44/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+44/shape = SubResource( 59 )
 44/shape_one_way = false
-44/shape_one_way_margin = 0.0
-44/shapes = [  ]
+44/shape_one_way_margin = 1.0
+44/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 59 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 44/z_index = 0
 45/name = "forestDecoration_0.png 45"
 45/texture = ExtResource( 4 )
@@ -688,16 +748,17 @@ func _is_tile_bound(id, neighbour_id):
 45/tile_mode = 0
 45/occluder_offset = Vector2( 0, 0 )
 45/navigation_offset = Vector2( 0, 0 )
-45/shape_offset = Vector2( 0, -16 )
-45/shape_transform = Transform2D( 1, 0, 0, 1, 0, -16 )
+45/shape_offset = Vector2( 0, 0 )
+45/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+45/shape = SubResource( 60 )
 45/shape_one_way = false
 45/shape_one_way_margin = 1.0
 45/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": null,
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, -16 )
+"shape": SubResource( 60 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 45/z_index = 0
 46/name = "forestDecoration_0.png 46"
@@ -708,16 +769,17 @@ func _is_tile_bound(id, neighbour_id):
 46/tile_mode = 0
 46/occluder_offset = Vector2( 0, 0 )
 46/navigation_offset = Vector2( 0, 0 )
-46/shape_offset = Vector2( 0, -16 )
-46/shape_transform = Transform2D( 1, 0, 0, 1, 0, -16 )
+46/shape_offset = Vector2( 0, 0 )
+46/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+46/shape = SubResource( 61 )
 46/shape_one_way = false
 46/shape_one_way_margin = 1.0
 46/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": null,
-"shape_transform": Transform2D( 1, 0, 0, 1, 0, -16 )
+"shape": SubResource( 61 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
 } ]
 46/z_index = 0
 47/name = "forestDecoration_0.png 47"
@@ -730,9 +792,16 @@ func _is_tile_bound(id, neighbour_id):
 47/navigation_offset = Vector2( 0, 0 )
 47/shape_offset = Vector2( 0, 0 )
 47/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+47/shape = SubResource( 62 )
 47/shape_one_way = false
-47/shape_one_way_margin = 0.0
-47/shapes = [  ]
+47/shape_one_way_margin = 1.0
+47/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 62 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 47/z_index = 0
 48/name = "forestDecoration_0.png 48"
 48/texture = ExtResource( 4 )
@@ -744,9 +813,16 @@ func _is_tile_bound(id, neighbour_id):
 48/navigation_offset = Vector2( 0, 0 )
 48/shape_offset = Vector2( 0, 0 )
 48/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+48/shape = SubResource( 63 )
 48/shape_one_way = false
-48/shape_one_way_margin = 0.0
-48/shapes = [  ]
+48/shape_one_way_margin = 1.0
+48/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 63 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 48/z_index = 0
 49/name = "forestDecoration_0.png 49"
 49/texture = ExtResource( 4 )
@@ -758,9 +834,16 @@ func _is_tile_bound(id, neighbour_id):
 49/navigation_offset = Vector2( 0, 0 )
 49/shape_offset = Vector2( 0, 0 )
 49/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+49/shape = SubResource( 64 )
 49/shape_one_way = false
-49/shape_one_way_margin = 0.0
-49/shapes = [  ]
+49/shape_one_way_margin = 1.0
+49/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 64 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 49/z_index = 0
 50/name = "forestDecoration_0.png 50"
 50/texture = ExtResource( 4 )
@@ -772,9 +855,16 @@ func _is_tile_bound(id, neighbour_id):
 50/navigation_offset = Vector2( 0, 0 )
 50/shape_offset = Vector2( 0, 0 )
 50/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+50/shape = SubResource( 65 )
 50/shape_one_way = false
-50/shape_one_way_margin = 0.0
-50/shapes = [  ]
+50/shape_one_way_margin = 1.0
+50/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 65 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 50/z_index = 0
 51/name = "forestDecoration_0.png 51"
 51/texture = ExtResource( 4 )
@@ -786,9 +876,16 @@ func _is_tile_bound(id, neighbour_id):
 51/navigation_offset = Vector2( 0, 0 )
 51/shape_offset = Vector2( 0, 0 )
 51/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+51/shape = SubResource( 66 )
 51/shape_one_way = false
-51/shape_one_way_margin = 0.0
-51/shapes = [  ]
+51/shape_one_way_margin = 1.0
+51/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 66 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 51/z_index = 0
 52/name = "forestDecoration_0.png 52"
 52/texture = ExtResource( 4 )
@@ -800,9 +897,16 @@ func _is_tile_bound(id, neighbour_id):
 52/navigation_offset = Vector2( 0, 0 )
 52/shape_offset = Vector2( 0, 0 )
 52/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+52/shape = SubResource( 67 )
 52/shape_one_way = false
-52/shape_one_way_margin = 0.0
-52/shapes = [  ]
+52/shape_one_way_margin = 1.0
+52/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 67 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 52/z_index = 0
 53/name = "forestDecoration_0.png 53"
 53/texture = ExtResource( 4 )
@@ -814,9 +918,16 @@ func _is_tile_bound(id, neighbour_id):
 53/navigation_offset = Vector2( 0, 0 )
 53/shape_offset = Vector2( 0, 0 )
 53/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+53/shape = SubResource( 68 )
 53/shape_one_way = false
-53/shape_one_way_margin = 0.0
-53/shapes = [  ]
+53/shape_one_way_margin = 1.0
+53/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 68 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, 0 )
+} ]
 53/z_index = 0
 54/name = "forestDecoration_0.png 54"
 54/texture = ExtResource( 4 )
@@ -828,13 +939,14 @@ func _is_tile_bound(id, neighbour_id):
 54/navigation_offset = Vector2( 0, 0 )
 54/shape_offset = Vector2( 0, -16 )
 54/shape_transform = Transform2D( 1, 0, 0, 1, 0, -16 )
+54/shape = SubResource( 71 )
 54/shape_one_way = false
 54/shape_one_way_margin = 1.0
 54/shapes = [ {
 "autotile_coord": Vector2( 0, 0 ),
 "one_way": false,
 "one_way_margin": 1.0,
-"shape": null,
+"shape": SubResource( 71 ),
 "shape_transform": Transform2D( 1, 0, 0, 1, 0, -16 )
 } ]
 54/z_index = 0
@@ -845,12 +957,19 @@ func _is_tile_bound(id, neighbour_id):
 55/region = Rect2( 16, 48, 16, 32 )
 55/tile_mode = 0
 55/occluder_offset = Vector2( 0, 0 )
-55/navigation_offset = Vector2( 0, -16 )
-55/shape_offset = Vector2( 0, 0 )
-55/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+55/navigation_offset = Vector2( 0, 0 )
+55/shape_offset = Vector2( 0, -16 )
+55/shape_transform = Transform2D( 1, 0, 0, 1, 0, -16 )
+55/shape = SubResource( 69 )
 55/shape_one_way = false
-55/shape_one_way_margin = 0.0
-55/shapes = [  ]
+55/shape_one_way_margin = 1.0
+55/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 69 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, -16 )
+} ]
 55/z_index = 0
 56/name = "forestDecoration_0.png 56"
 56/texture = ExtResource( 4 )
@@ -859,12 +978,19 @@ func _is_tile_bound(id, neighbour_id):
 56/region = Rect2( 32, 48, 16, 32 )
 56/tile_mode = 0
 56/occluder_offset = Vector2( 0, 0 )
-56/navigation_offset = Vector2( 0, -16 )
-56/shape_offset = Vector2( 0, 0 )
-56/shape_transform = Transform2D( 1, 0, 0, 1, 0, 0 )
+56/navigation_offset = Vector2( 0, 0 )
+56/shape_offset = Vector2( 0, -16 )
+56/shape_transform = Transform2D( 1, 0, 0, 1, 0, -16 )
+56/shape = SubResource( 70 )
 56/shape_one_way = false
-56/shape_one_way_margin = 0.0
-56/shapes = [  ]
+56/shape_one_way_margin = 1.0
+56/shapes = [ {
+"autotile_coord": Vector2( 0, 0 ),
+"one_way": false,
+"one_way_margin": 1.0,
+"shape": SubResource( 70 ),
+"shape_transform": Transform2D( 1, 0, 0, 1, 0, -16 )
+} ]
 56/z_index = 0
 57/name = "forestDecoration_0.png 57"
 57/texture = ExtResource( 4 )

@@ -21,6 +21,8 @@ var tile_lookup = {
 	"LONG_GRASS":59,
 }
 
+var i = 0
+
 func _ready():
 	world_gen()
 
@@ -76,7 +78,7 @@ func gen_river():
 			"""if val > 0.95 and val < 1.15:
 				tile = 28"""
 			
-			if val > 1 and val < 1.1:
+			if val < 1.1:
 				tile = tile_lookup["WATER"]
 			
 			if tile:
