@@ -10,4 +10,4 @@ func _process(delta):
 	if debug:
 		$debug.text = Globals.debug
 	else:
-		$debug.text = "Salvos pre-alpha v0.0.0 (press [f1] to open debug)"
+		$debug.text = "Naturalis pre-alpha v0.0.0 (press [f1] to open debug)"

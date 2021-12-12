@@ -8,6 +8,8 @@ var velocity = Vector2()
 
 var selected_item = 0;
 
+var lookingforspawn = true
+
 var layer_lookup = {
 	0:"ground",
 	1:"ground2",
@@ -25,7 +27,7 @@ func _physics_process(delta):
 	else:
 		Globals.player_state = ""
 		speed = 30
-	
+	#4096
 	$AnimatedSprite2.hide()
 	if Globals.player_state == "WATER":
 		$AnimatedSprite2.show()

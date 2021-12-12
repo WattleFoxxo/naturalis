@@ -71,7 +71,7 @@ animations = [ {
 } ]
 
 [sub_resource type="RectangleShape2D" id=1]
-extents = Vector2( 2, 1 )
+extents = Vector2( 3, 2 )
 
 [sub_resource type="Animation" id=8]
 resource_name = "IDLE"
@@ -240,8 +240,7 @@ script = ExtResource( 2 )
 self_modulate = Color( 0.933333, 0.933333, 0.933333, 1 )
 position = Vector2( 3, 0 )
 frames = SubResource( 17 )
-animation = "MOVE"
-frame = 1
+animation = "IDLE"
 playing = true
 
 [node name="AnimatedSprite2" type="AnimatedSprite" parent="."]
@@ -249,8 +248,7 @@ visible = false
 self_modulate = Color( 0.933333, 0.933333, 0.933333, 1 )
 position = Vector2( 3, 0 )
 frames = SubResource( 23 )
-animation = "MOVE"
-frame = 1
+animation = "IDLE"
 playing = true
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
@@ -269,7 +267,5 @@ current = true
 zoom = Vector2( 0.2, 0.2 )
 limit_left = 0
 limit_top = 0
-limit_right = 4096
-limit_bottom = 4096
 smoothing_enabled = true
 smoothing_speed = 10.0
