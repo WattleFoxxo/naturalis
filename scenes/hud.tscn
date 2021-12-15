@@ -32,27 +32,21 @@ __meta__ = {
 }
 
 [node name="hotbar" type="Control" parent="."]
-anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -147.5
-margin_top = -67.0
-margin_right = 147.5
+margin_top = -88.0
 script = ExtResource( 3 )
 __meta__ = {
 "_edit_use_anchors_": false
 }
 
 [node name="HBoxContainer" type="HBoxContainer" parent="hotbar"]
-anchor_left = 0.5
 anchor_top = 1.0
-anchor_right = 0.5
+anchor_right = 1.0
 anchor_bottom = 1.0
-margin_left = -128.0
-margin_top = -70.0
-margin_right = 128.0
-margin_bottom = -6.0
+margin_top = -72.0
+margin_bottom = -8.0
 alignment = 1
 __meta__ = {
 "_edit_use_anchors_": false

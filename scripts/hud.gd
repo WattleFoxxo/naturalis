@@ -8,6 +8,6 @@ func _input(ev):
 		
 func _process(delta):
 	if debug:
-		$debug.text = Globals.debug
+		$debug.text = Game.debug
 	else:
-		$debug.text = Globals.game_id+" (press [f1] to open debug)"
+		$debug.text = Game.game_id+" (press [f1] to open debug)"

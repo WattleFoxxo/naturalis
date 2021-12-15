@@ -22,6 +22,9 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 rect_min_size = Vector2( 64, 64 )
 color = Color( 0.380392, 0.380392, 0.380392, 1 )
+__meta__ = {
+"_edit_use_anchors_": false
+}
 
 [node name="name" type="Label" parent="."]
 anchor_right = 1.0

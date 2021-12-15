@@ -27,23 +27,23 @@ func _ready():
 	world_gen()
 
 func _process(delta):
-	Globals.playerpos = Vector2(round(player.position.x/8), round(player.position.y/8))
+	Game.playerpos = Vector2(round(player.position.x/8), round(player.position.y/8))
 
 func world_gen():
-	rng.seed = Globals.world_seed
+	rng.seed = Game.world_seed
 	gen_ground()
 	gen_river()
 	gen_objects()
 
 func gen_ground():
-	terrain_noise.seed = Globals.world_seed
+	terrain_noise.seed = Game.world_seed
 	terrain_noise.octaves = 7
 	terrain_noise.period = 128
 	terrain_noise.lacunarity = 2
 	terrain_noise.persistence = 0.7
 
-	for x in Globals.world_width:
-		for y in Globals.world_height:
+	for x in Game.world_width:
+		for y in Game.world_height:
 			var tile
 			var val = terrain_noise.get_noise_2d(x*6, y*6) + 1
 			
@@ -64,14 +64,14 @@ func gen_ground():
 	layer_ground.update_bitmask_region()
 
 func gen_river():
-	river_noise.seed = Globals.world_seed
+	river_noise.seed = Game.world_seed
 	river_noise.octaves = 5
 	river_noise.period = 128
 	river_noise.lacunarity = 2
 	river_noise.persistence = 0.5
 
-	for x in Globals.world_width:
-		for y in Globals.world_height:
+	for x in Game.world_width:
+		for y in Game.world_height:
 			var val = river_noise.get_noise_2d(x, y) + 1
 			var tile
 			
@@ -88,14 +88,14 @@ func gen_river():
 	layer_ground_cover.update_bitmask_region()
 
 func gen_objects():
-	tree_noise.seed = Globals.world_seed
+	tree_noise.seed = Game.world_seed
 	tree_noise.octaves = 7
 	tree_noise.period = 128
 	tree_noise.lacunarity = 2
 	tree_noise.persistence = 0.7
 
-	for x in Globals.world_width:
-		for y in Globals.world_height:
+	for x in Game.world_width:
+		for y in Game.world_height:
 			var tile
 			var val = tree_noise.get_noise_2d(x*15, y*15) + 1
 			
