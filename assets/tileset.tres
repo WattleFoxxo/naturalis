@@ -222,21 +222,20 @@ script/source = "extends TileSet
 tool
 
 const VOID = -1
-const PATH = 0
-const GRASS = 1
-const WATER = 2
-const LONG_GRASS = 29
-const LONG_LONG_GRASS = 30
-const FLOWER_1 = 31
-const FLOWER_2 = 32
-const FLOWER_3 = 33
+const WATER = 37
+const GRASS = 38
+const BUSH = 51
+const PINE = 54
+const TREE = 55
+const LONG_GRASS = 59
+const FIRE_PIT = 50
+const FIRE_PIT_LIT = 36
+const FENCE = 58
+const SIGN = 53
 
 var binds = {
 	WATER: [VOID],
-	GRASS: [VOID, PATH, LONG_GRASS, LONG_LONG_GRASS, FLOWER_1, FLOWER_2, FLOWER_3],
-	PATH: [],
-	LONG_GRASS: [],
-	LONG_LONG_GRASS: [],
+	GRASS: [VOID],
 }
 
 func _is_tile_bound(id, neighbour_id):

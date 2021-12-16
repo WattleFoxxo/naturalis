@@ -11,25 +11,27 @@ var terrain_noise = OpenSimplexNoise.new()
 var tree_noise = OpenSimplexNoise.new()
 var rng = RandomNumberGenerator.new()
 
-var tile_lookup = {
-	"WATER":37,
-	"GRASS":38,
-	"BUSH_0":51,
-	"BUSH_1":52,
-	"PINE":54,
-	"TREE":55,
-	"LONG_GRASS":59,
-}
-
-var i = 0
+var world_dir = ""
 
 func _ready():
-	world_gen()
+	pass
+
+func new_game(name, world_seed):
+	world_gen(world_seed)
+	spawn_player()
+	savefile("user://"+name)
+	loadfile("user://"+name)
+	world_dir = "user://"+name
+
+func load_game(name):
+	loadfile(name)
+	world_dir = name
 
 func _process(delta):
 	Game.playerpos = Vector2(round(player.position.x/8), round(player.position.y/8))
 
-func world_gen():
+func world_gen(world_seed):
+	Game.world_seed = world_seed
 	rng.seed = Game.world_seed
 	gen_ground()
 	gen_river()
@@ -47,18 +49,15 @@ func gen_ground():
 			var tile
 			var val = terrain_noise.get_noise_2d(x*6, y*6) + 1
 			
-			if val > 1.33:
-				pass#tile = rng.randi_range(31, 33)
+			val = terrain_noise.get_noise_2d(x*13, y*13) + 1
 			
-			val = terrain_noise.get_noise_2d(x*23, y*23) + 1
+			if val > 1.1:
+				tile = Game.LONG_GRASS
 			
-			if val > 1.2:
-				tile = tile_lookup["LONG_GRASS"]
-			
-			layer_ground.set_cell(x, y, tile_lookup["GRASS"])
+			layer_ground.set_cell(x, y, Game.GRASS)
 			
 			if tile:
-				layer_ground_cover.set_cell(x, y, tile, false, false, false, get_subtile_with_priority(tile, layer_ground_cover))
+				layer_ground_cover.set_cell(x, y,  tile, false, false, false, get_subtile_with_priority(tile, layer_ground_cover))
 	
 	layer_ground_cover.update_bitmask_region()
 	layer_ground.update_bitmask_region()
@@ -75,11 +74,8 @@ func gen_river():
 			var val = river_noise.get_noise_2d(x, y) + 1
 			var tile
 			
-			"""if val > 0.95 and val < 1.15:
-				tile = 28"""
-			
-			if val < 1.1:
-				tile = tile_lookup["WATER"]
+			if val > 0.85:
+				tile = Game.WATER
 			
 			if tile:
 				layer_ground.set_cell(x, y, tile)
@@ -100,14 +96,14 @@ func gen_objects():
 			var val = tree_noise.get_noise_2d(x*15, y*15) + 1
 			
 			if val > 1.2:
-				if layer_ground.get_cell(x, y) == tile_lookup["GRASS"]:
-					tile = rng.randi_range(tile_lookup["PINE"], tile_lookup["TREE"])
+				if layer_ground.get_cell(x, y) == Game.GRASS:
+					tile = rng.randi_range(Game.PINE, Game.TREE)
 			
 			val = tree_noise.get_noise_2d(x*32, y*32) + 1
 			
 			if val > 1.32:
-				if layer_ground.get_cell(x, y) == tile_lookup["GRASS"]:
-					tile = rng.randi_range(tile_lookup["BUSH_0"], tile_lookup["BUSH_1"])
+				if layer_ground.get_cell(x, y) == Game.GRASS:
+					tile = Game.BUSH
 			
 			if tile:
 				layer_tree.set_cell(x, y, tile)
@@ -126,3 +122,73 @@ func get_subtile_with_priority(id, tilemap: TileMap):
 				tile_array.append(Vector2(x,y))
 
 	return tile_array[randi() % tile_array.size()]
+
+
+func spawn_player():
+	while true:
+		var x = rng.randi_range(0, Game.world_width)
+		var y = rng.randi_range(0, Game.world_height)
+		var tile = layer_ground.get_cell(x, y)
+		if tile == Game.GRASS:
+			player.position = Vector2(x*16, y*16)
+			return
+
+func savefile(name):
+	var dir = Directory.new()
+	dir.open("user://")
+	dir.make_dir(name)
+	
+	var layer1 = PackedScene.new()
+	layer1.pack(layer_ground)
+	ResourceSaver.save(name+"/one.scn", layer1)
+	
+	var layer2 = PackedScene.new()
+	layer2.pack(layer_ground_cover)
+	ResourceSaver.save(name+"/two.scn", layer2)
+	
+	var layer3 = PackedScene.new()
+	layer3.pack(layer_tree)
+	ResourceSaver.save(name+"/three.scn", layer3)
+	
+	var save = {
+		"pos":player.position,
+		"inventory":Game.inventory,
+		"seed":Game.world_seed,
+	}
+	var file = File.new()
+	file.open(name+"/data.save", File.WRITE)
+	file.store_var(save, true)
+	file.close()
+
+func loadfile(save_name):
+	
+	remove_child(layer_ground)
+	add_child(load(save_name+"/one.scn").instance(), true)
+	layer_ground = $ground
+	move_child(layer_ground, 0)
+	
+	remove_child(layer_ground_cover)
+	add_child(load(save_name+"/two.scn").instance(), true)
+	layer_ground_cover = $ground2
+	move_child(layer_ground_cover, 1)
+	
+	$YSort.remove_child($YSort/tree)
+	$YSort.add_child(load(save_name+"/three.scn").instance(), true)
+	layer_tree = $YSort/tree
+	
+	var file = File.new()
+	var save
+	
+	if file.file_exists(save_name+"/data.save"):
+		file.open(save_name+"/data.save", File.READ)
+		save = file.get_var(true)
+		file.close()
+	
+	player.position = save.pos
+	Game.inventory = save.inventory
+	Game.world_seed = save.seed
+
+func _notification(what):
+	if (what == MainLoop.NOTIFICATION_WM_QUIT_REQUEST):
+		savefile(world_dir)
+		get_tree().quit()

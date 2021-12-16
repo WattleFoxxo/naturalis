@@ -5,20 +5,19 @@ var game_id = "naturalis pre-alpha v0.0.1"
 var world_width = 512#128#256
 var world_height = 512#128#256
 
-var world_seed = 621
+var world_seed = 69420
 
-var VOID = -1
-var WATER = 37
-var GRASS = 38
-var BUSH_0 = 51
-var BUSH_1 = 52
-var PINE = 54
-var TREE = 55
-var LONG_GRASS = 59
-var FIRE_PIT = 50
-var FIRE_PIT_LIT = 36
-var FENCE = 58
-var SIGN = 53
+const VOID = -1
+const WATER = 37
+const GRASS = 38
+const BUSH = 51
+const PINE = 54
+const TREE = 55
+const LONG_GRASS = 59
+const FIRE_PIT = 50
+const FIRE_PIT_LIT = 36
+const FENCE = 58
+const SIGN = 53
 
 """
 
@@ -113,6 +112,19 @@ var item_lookup = {
 		}
 	},
 	
+	"bush":{
+		"name":"bush", 
+		"is_tile": true, 
+		"tile_id":BUSH, 
+		"layer": 2, 
+		"allowed_tiles":[VOID, GRASS, LONG_GRASS], 
+		"clear_layer":[],
+		"loot_table":{
+			"stick":2,
+			"saplings":1
+		}
+	},
+	
 	"stick":{
 		"name":"stick", 
 		"is_tile": false
@@ -139,16 +151,17 @@ var tile_to_id = {
 	FENCE:"fence",
 	SIGN:"sign",
 	PINE:"pine_tree",
-	TREE:"tree"
+	TREE:"tree",
+	BUSH:"bush",
 }
 
 var playerpos = Vector2(0, 0)
 var item_held = 0
 
 var inventory = {
-	0:{"id":"fire_pit", "count":128},
-	1:{"id":"fence", "count":128},
-	2:{"id":"sign", "count":128},
+	0:{"id":"null", "count":0},
+	1:{"id":"null", "count":0},
+	2:{"id":"null", "count":0},
 	3:{"id":"null", "count":0},
 	4:{"id":"null", "count":0},
 	5:{"id":"null", "count":0},
@@ -162,7 +175,7 @@ var player_state = "WATER"
 var debug = ""
 
 func _process(delta):
-	debug = game_id+"\nPosition (x, y): "+str(playerpos)+"\nFPS: "+str(Engine.get_frames_per_second())
+	debug = game_id+"\nPosition (x, y): "+str(playerpos)+"\nFPS: "+str(Engine.get_frames_per_second())+"\nWorld Seed: "+str(world_seed)
 
 func getItem(id):
 	return item_lookup[id]
