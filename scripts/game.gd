@@ -155,6 +155,20 @@ var tile_to_id = {
 	BUSH:"bush",
 }
 
+var crafting_table = {
+	"fire_pit":{
+		"log":2,
+		"stick":3
+	},
+	"fence":{
+		"stick":3
+	},
+	"sign":{
+		"log":1,
+		"stick":1
+	}
+} 
+
 var playerpos = Vector2(0, 0)
 var item_held = 0
 
@@ -188,3 +202,44 @@ func itemHeld():
 
 func itemHeldInventory():
 	return inventory[item_held]
+
+func addInventoryItem(id, count):
+	var done = false
+	for i in Game.inventory:
+		if Game.inventory[i].id == id and !done:
+			Game.inventory[i].count += count
+			done = true
+
+	if !done:
+		for i in Game.inventory:
+			if Game.inventory[i].id == "null" and !done:
+				Game.inventory[i].id = id
+				Game.inventory[i].count = count
+				done = true
+
+func removeInventoryItem(id, count):
+	var error
+	for i in Game.inventory:
+		if Game.inventory[i].id == id:
+			if Game.inventory[i].count >= count:
+				Game.inventory[i].count -= count
+				if Game.inventory[i].count == 0:
+					Game.inventory[i].id = "null"
+				return 0
+			else:
+				error = 2
+		else:
+			error = 1
+	return error
+
+func craftItem(item):
+	var escrow = {}
+	for i in crafting_table[item]:
+		var error = removeInventoryItem(i, crafting_table[item][i])
+		if error != 0:
+			for j in escrow:
+				addInventoryItem(j, escrow[j])
+			return 1
+		escrow[i] = crafting_table[item][i]
+	addInventoryItem(item, 1)
+	return 0

@@ -25,7 +25,7 @@ func _on_play_new_game_pressed():
 
 
 func _on_select_save_pressed():
-	$"TabContainer/Load Game/FileDialog".popup()
+	$FileDialog.popup()
 
 func _on_FileDialog_dir_selected(dir):
 	get_tree().get_root().add_child(preload("res://scenes/world.tscn").instance())
