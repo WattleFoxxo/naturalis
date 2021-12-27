@@ -129,7 +129,7 @@ func spawn_player():
 		var x = rng.randi_range(0, Game.world_width)
 		var y = rng.randi_range(0, Game.world_height)
 		var tile = layer_ground.get_cell(x, y)
-		if tile == Game.GRASS:
+		if tile == Game.WATER:
 			player.position = Vector2(x*16, y*16)
 			return
 
